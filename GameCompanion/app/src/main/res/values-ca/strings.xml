@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GameCompanion</string>
+
+    <string name="tab_profile">Perfil</string>
+    <string name="tab_friends">Amics</string>
+    <string name="tab_feed">Amics</string>
+    <string name="tab_chat">Xat</string>
+</resources>
