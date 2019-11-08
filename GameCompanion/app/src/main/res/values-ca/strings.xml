@@ -5,4 +5,6 @@
     <string name="tab_friends">Amics</string>
     <string name="tab_feed">Amics</string>
     <string name="tab_chat">Xat</string>
+    <string name="profile_register_button">Registrat aquí</string>
+
 </resources>
