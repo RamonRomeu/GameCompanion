@@ -6,5 +6,6 @@
     <string name="tab_feed">Amics</string>
     <string name="tab_chat">Xat</string>
     <string name="profile_register_button">Registrat aquí</string>
+    <string name="profile_logout_button">Sortir</string>
 
 </resources>
