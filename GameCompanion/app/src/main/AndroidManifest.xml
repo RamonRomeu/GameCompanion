@@ -9,9 +9,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".RegisterActivity" android:label="Register" android:parentActivityName=".MainActivity">
+        <activity android:name=".activity.RegisterActivity" android:label="Register" android:parentActivityName="com.example.gamecompanion.activity.MainActivity">
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.gamecompanion.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

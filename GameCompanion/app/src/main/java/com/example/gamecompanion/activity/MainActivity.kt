@@ -1,7 +1,9 @@
-package com.example.gamecompanion
+package com.example.gamecompanion.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.gamecompanion.R
+import com.example.gamecompanion.fragment.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -11,13 +13,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         bottomNavigationView.setOnNavigationItemSelectedListener{ menuItem ->
             when(menuItem.itemId){
-                R.id.chat->{
+                R.id.chat ->{
 
                 }
-                R.id.feed->{
+                R.id.feed ->{
 
                 }
-                R.id.profile->{
+                R.id.profile ->{
                     //Create Fragment
                     val profileFragment = ProfileFragment()
                     //Add Fragment to Fragment Container
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
                     fragmentTransaction.add(fragmentContainer.id, profileFragment)
                     fragmentTransaction.commit()
                 }
-                R.id.friends->{
+                R.id.friends ->{
 
                 }
 

@@ -1,11 +1,14 @@
-package com.example.gamecompanion
+package com.example.gamecompanion.activity
 
-import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.widget.Toast
+import com.example.gamecompanion.R
+import com.example.gamecompanion.model.UserModel
+import com.example.gamecompanion.util.COLECTION_USERS
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 
 
@@ -49,8 +52,28 @@ class RegisterActivity : AppCompatActivity() {
             //4 Create User
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
                 .addOnSuccessListener { authResult ->
-                    Toast.makeText(this, "Success creating new user",Toast.LENGTH_LONG).show()
-                    finish() //close Activity
+
+                    //create user profile
+                    val userModel = UserModel(
+                        userId = authResult.user?.uid ?: "",
+                        username = username,
+                        email = email
+                    )
+                    //Add to Firebase
+                    FirebaseFirestore.getInstance()
+                        .collection(COLECTION_USERS)
+                        .document(authResult.user?.uid ?:"")
+                        .set(userModel)
+                            //succes creating user
+                        .addOnSuccessListener {
+                            Toast.makeText(this, "Success creating new user",Toast.LENGTH_LONG).show()
+                            finish()
+                        }
+                        .addOnFailureListener {
+                            //handle errors
+                            Toast.makeText(this, it.localizedMessage,Toast.LENGTH_LONG).show()
+                        }
+
 
                 }
                 .addOnFailureListener {

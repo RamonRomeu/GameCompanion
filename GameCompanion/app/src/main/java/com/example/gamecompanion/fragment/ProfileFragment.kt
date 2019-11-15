@@ -1,4 +1,4 @@
-package com.example.gamecompanion
+package com.example.gamecompanion.fragment
 
 
 import android.content.Intent
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.gamecompanion.R
+import com.example.gamecompanion.activity.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -59,6 +61,7 @@ class ProfileFragment : Fragment() {
                 logoutButton.setOnClickListener {
                     //logout user
                     FirebaseAuth.getInstance().signOut()
+                    initUI()
                 }
             }
         }
