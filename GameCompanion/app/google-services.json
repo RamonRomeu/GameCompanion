@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "138563427220",
-    "firebase_url": "https://enti-helloworldramon.firebaseio.com",
-    "project_id": "enti-helloworldramon",
-    "storage_bucket": "enti-helloworldramon.appspot.com"
+    "project_number": "709133522315",
+    "firebase_url": "https://gamecompanionpaumon.firebaseio.com",
+    "project_id": "gamecompanionpaumon",
+    "storage_bucket": "gamecompanionpaumon.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:138563427220:android:bdb5346b0dc5f4fd75cd81",
+        "mobilesdk_app_id": "1:709133522315:android:283896296b3c143dfd8b8e",
         "android_client_info": {
-          "package_name": "com.example.gamecompanion"
+          "package_name": "com.example.gamecompanionPauMon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "138563427220-504sitfhqc1ak15t630ve792lpqja6hv.apps.googleusercontent.com",
+          "client_id": "709133522315-b02qf0pahkrtjmivi1qit392cr7eea8c.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA0Hs1EY6AclzdUVf8jA3MNHsdEX9J_Obo"
+          "current_key": "AIzaSyAlFTjYK33_35cfX6ZjZSA3GNTH4zyIJjc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "138563427220-504sitfhqc1ak15t630ve792lpqja6hv.apps.googleusercontent.com",
+              "client_id": "709133522315-b02qf0pahkrtjmivi1qit392cr7eea8c.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
