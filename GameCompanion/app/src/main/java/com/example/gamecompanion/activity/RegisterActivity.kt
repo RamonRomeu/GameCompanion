@@ -83,6 +83,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+
     private fun isPasswordValid(password: String): Boolean{
 
         //password >= 4 characters
