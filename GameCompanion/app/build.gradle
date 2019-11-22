@@ -44,6 +44,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.1.0'
     implementation 'com.google.firebase:firebase-firestore:21.3.0'
 
+    //ads
+    implementation 'com.google.firebase:firebase-ads:18.3.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
