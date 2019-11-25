@@ -25,6 +25,7 @@ class RegisterActivity : AppCompatActivity() {
             val username = usernameEditText.text?.toString().orEmpty()
             val email = emailEditText.text?.toString().orEmpty()
             val password = passwordEditText.text?.toString().orEmpty()
+
             //3 Validacio
             //3.1 Username validation
             if(username.trim().isEmpty()){
@@ -58,6 +59,7 @@ class RegisterActivity : AppCompatActivity() {
                         userId = authResult.user?.uid ?: "",
                         username = username,
                         email = email
+
                     )
                     //Add to Firebase
                     FirebaseFirestore.getInstance()
