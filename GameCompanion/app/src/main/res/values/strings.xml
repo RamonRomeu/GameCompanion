@@ -7,6 +7,7 @@
     <string name="tab_chat">Chat</string>
     <string name="profile_register_button">Register Here</string>
     <string name="profile_logout_button">Logout</string>
+    <string name="profile_login_button">Login</string>
 
 
 

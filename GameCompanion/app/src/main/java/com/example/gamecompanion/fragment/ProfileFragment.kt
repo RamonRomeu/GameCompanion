@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.gamecompanion.R
+import com.example.gamecompanion.activity.LoginActivity
 import com.example.gamecompanion.activity.RegisterActivity
 import com.example.gamecompanion.model.UserModel
 import com.example.gamecompanion.util.COLECTION_USERS
@@ -61,20 +62,29 @@ class ProfileFragment : Fragment() {
             if (FirebaseAuth.getInstance().currentUser == null) {
                 //1-No user
                 //show register buttom
+                loginButton.visibility = View.VISIBLE
                 logoutButton.visibility= View.GONE
                 registerButton.visibility = View.VISIBLE
                 usernameTextView.visibility=View.GONE
+                avatar.visibility = View.GONE
+                takePicture.visibility = View.GONE
                 registerButton.setOnClickListener {
                     //TODO: Go to Register
                     startActivity(Intent(requireContext(), RegisterActivity::class.java))
+                }
+                loginButton.setOnClickListener {
+                    startActivity(Intent(requireContext(), LoginActivity::class.java))
                 }
             } else {
                 //2-User Available
                 //hide register button
                 registerButton.visibility = View.GONE
                 //else: Show Profile
+                loginButton.visibility = View.GONE
                 logoutButton.visibility = View.VISIBLE
                 usernameTextView.visibility=View.VISIBLE
+                avatar.visibility = View.VISIBLE
+                takePicture.visibility = View.VISIBLE
                 logoutButton.setOnClickListener {
                     //logout user
                     FirebaseAuth.getInstance().signOut()

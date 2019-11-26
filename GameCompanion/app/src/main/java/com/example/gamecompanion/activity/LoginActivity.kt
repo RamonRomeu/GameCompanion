@@ -2,57 +2,47 @@ package com.example.gamecompanion.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Patterns
 import android.widget.Toast
 import com.example.gamecompanion.R
-import com.example.gamecompanion.model.UserModel
-import com.example.gamecompanion.util.COLECTION_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-
-class RegisterActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_login)
 
 
         //1 Listener
-        registerButton.setOnClickListener {
+        loginButton.setOnClickListener {
             //2 Read TextFields
             val username = usernameEditText.text?.toString().orEmpty()
-            val email = emailEditText.text?.toString().orEmpty()
             val password = passwordEditText.text?.toString().orEmpty()
 
             //3 Validacio
             //3.1 Username validation
             if(username.trim().isEmpty()){
                 //Error
-                Toast.makeText(this, getString(R.string.tab_profile),Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.tab_profile), Toast.LENGTH_LONG).show()
                 //or
                 usernameEditText.error = "Username required"
                 return@setOnClickListener
 
             }
-            //3.2 Email Validation
-            if(email.isBlank() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                //Error
-                Toast.makeText(this, getString(R.string.tab_profile),Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
+
             //3.3 Password Validation
 
             if(password.isBlank() || !isPasswordValid(password)){
                 //Error
-                Toast.makeText(this, getString(R.string.tab_profile),Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.tab_profile), Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
             //4 Create User
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
+            /*FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
                 .addOnSuccessListener { authResult ->
 
                     //create user profile
@@ -67,22 +57,22 @@ class RegisterActivity : AppCompatActivity() {
                         .collection(COLECTION_USERS)
                         .document(authResult.user?.uid ?:"")
                         .set(userModel)
-                            //succes creating user
+                        //succes creating user
                         .addOnSuccessListener {
-                            Toast.makeText(this, "Success creating new user",Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "Success creating new user", Toast.LENGTH_LONG).show()
                             finish()
                         }
                         .addOnFailureListener {
                             //handle errors
-                            Toast.makeText(this, it.localizedMessage,Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, it.localizedMessage, Toast.LENGTH_LONG).show()
                         }
 
 
                 }
                 .addOnFailureListener {
                     //5 Handle Errors
-                    Toast.makeText(this,it.localizedMessage,Toast.LENGTH_LONG).show()
-                }
+                    Toast.makeText(this,it.localizedMessage, Toast.LENGTH_LONG).show()
+                }*/
         }
     }
 
@@ -99,12 +89,12 @@ class RegisterActivity : AppCompatActivity() {
 
         //Contain letter and number
 
-         for(letter in password){
-             if(letter.isDigit())
-                 digit++
-             else if(letter.isLetter())
-                 let++
-         }
+        for(letter in password){
+            if(letter.isDigit())
+                digit++
+            else if(letter.isLetter())
+                let++
+        }
 
         if(digit== password.length)
             return false
