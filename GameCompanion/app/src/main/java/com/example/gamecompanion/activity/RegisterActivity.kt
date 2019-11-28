@@ -10,7 +10,6 @@ import com.example.gamecompanion.util.COLECTION_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -21,11 +20,12 @@ class RegisterActivity : AppCompatActivity() {
 
 
         //1 Listener
-        registerButton.setOnClickListener {
+        loginButton.setOnClickListener {
             //2 Read TextFields
             val username = usernameEditText.text?.toString().orEmpty()
             val email = emailEditText.text?.toString().orEmpty()
             val password = passwordEditText.text?.toString().orEmpty()
+
             //3 Validacio
             //3.1 Username validation
             if(username.trim().isEmpty()){
@@ -59,6 +59,7 @@ class RegisterActivity : AppCompatActivity() {
                         userId = authResult.user?.uid ?: "",
                         username = username,
                         email = email
+
                     )
                     //Add to Firebase
                     FirebaseFirestore.getInstance()
@@ -89,7 +90,7 @@ class RegisterActivity : AppCompatActivity() {
 
         //password >= 4 characters
 
-        if(password.length < 4 )
+        if(password.length <4 )
             return false
 
         var digit =0

@@ -28,6 +28,7 @@ class SharePreferencesManager {
         sharedPreferences.edit().putString(usernameKey,username).apply()
     }
 
+
     fun clear(context: Context){
         val sharedPreferences=context.getSharedPreferences(userPreferencesFileName,Context.MODE_PRIVATE)
         sharedPreferences.edit().clear().apply()

@@ -4,47 +4,47 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".fragment.ProfileFragment"
-            android:orientation="vertical">
+            android:orientation="vertical"
+>
 
     <!-- TODO: Update blank fragment layout -->
 
 
     <Button
             android:id="@+id/registerButton"
+
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_medium_height"
+
             android:text="@string/profile_register_button"/>
 
     <Button
             android:id="@+id/logoutButton"
+
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_medium_height"
+            android:layout_height="48dp"
+
             android:text="@string/profile_logout_button"/>
 
-
-    <Button
-            android:id="@+id/loginButton"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_medium_height"
-            android:text="@string/profile_login_button" />
 
     <TextView
             android:id="@+id/usernameTextView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
 
-<<<<<<< HEAD
+    />
+
     <ImageView
             android:id="@+id/avatar"
             android:layout_width="@dimen/item_medium_height" android:layout_height="@dimen/item_medium_height"
             android:src="@drawable/ic_profile"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+    />
 
     <Button
             android:id="@+id/takePicture"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:text="Update Picture"
-            android:layout_gravity="center" />
-=======
->>>>>>> parent of 7325166... added camera
+            android:layout_gravity="center"
+    />
 </LinearLayout>

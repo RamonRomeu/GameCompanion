@@ -72,8 +72,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button android:layout_width="match_parent" android:layout_height="48dp"
-            android:id="@+id/RegisterButton"
-            android:text="Register"
+            android:id="@+id/loginButton"
+            android:text="Login"
             android:backgroundTint="@color/colorPrimary"
             android:textColor="#FFFFFF"
     />

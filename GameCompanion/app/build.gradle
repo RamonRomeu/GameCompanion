@@ -47,6 +47,9 @@ dependencies {
     //ads
     implementation 'com.google.firebase:firebase-ads:18.3.0'
 
+    //cloud storage images
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

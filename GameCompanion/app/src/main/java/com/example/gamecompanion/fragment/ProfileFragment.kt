@@ -4,21 +4,26 @@ package com.example.gamecompanion.fragment
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.gamecompanion.R
-import com.example.gamecompanion.activity.LoginActivity
 import com.example.gamecompanion.activity.RegisterActivity
 import com.example.gamecompanion.model.UserModel
 import com.example.gamecompanion.util.COLECTION_USERS
 import com.example.gamecompanion.util.SharePreferencesManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_profile.*
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -56,29 +61,20 @@ class ProfileFragment : Fragment() {
             if (FirebaseAuth.getInstance().currentUser == null) {
                 //1-No user
                 //show register buttom
-                loginButton.visibility = View.VISIBLE
                 logoutButton.visibility= View.GONE
                 registerButton.visibility = View.VISIBLE
                 usernameTextView.visibility=View.GONE
-                avatar.visibility = View.GONE
-                takePicture.visibility = View.GONE
                 registerButton.setOnClickListener {
                     //TODO: Go to Register
                     startActivity(Intent(requireContext(), RegisterActivity::class.java))
-                }
-                loginButton.setOnClickListener {
-                    startActivity(Intent(requireContext(), LoginActivity::class.java))
                 }
             } else {
                 //2-User Available
                 //hide register button
                 registerButton.visibility = View.GONE
                 //else: Show Profile
-                loginButton.visibility = View.GONE
                 logoutButton.visibility = View.VISIBLE
                 usernameTextView.visibility=View.VISIBLE
-                avatar.visibility = View.VISIBLE
-                takePicture.visibility = View.VISIBLE
                 logoutButton.setOnClickListener {
                     //logout user
                     FirebaseAuth.getInstance().signOut()
@@ -86,7 +82,12 @@ class ProfileFragment : Fragment() {
                     SharePreferencesManager().clear(requireContext())
                     initUI()
                 }
-                showUser();
+                showUser()
+                takePicture.setOnClickListener(){
+                    //Take photo
+                    takePicture()
+
+                }
 
             }
         }
@@ -121,5 +122,79 @@ class ProfileFragment : Fragment() {
 
         }
     }
+
+
+    // region Picture
+
+    private fun takePicture(){
+
+        val imageIntent=Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        imageIntent.resolveActivity(requireActivity().packageManager)
+        startActivityForResult(imageIntent,1)
+
+    }
+
+
+    //private fun createImageFile(){
+      //  val file= File(requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)?.toString()+"/"+"avatarImage.jpeg") //ruta del arxiu
+
+    //}
+
+    private fun saveImageFileToCloud(bitmap: Bitmap){
+        //convert image to bytes
+        val baos =ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,baos)
+        val imageBytes=baos.toByteArray()
+        //get folder reference
+        val storageReference = FirebaseStorage.getInstance().reference
+        val avatarsFolderReference = storageReference.child("public/avatars/") //url d'una carpeta en concret
+        val userID = FirebaseAuth.getInstance().currentUser?.uid?:""
+        val timestamp=System.currentTimeMillis()
+         val avatarImageReference = avatarsFolderReference.child("avatar_${userID}_${timestamp}.jpeg")
+
+        //upload image
+        avatarImageReference.putBytes(imageBytes)
+            .addOnSuccessListener {
+                //image upload succes
+                //get download URL
+
+                avatarImageReference.downloadUrl
+                    .addOnSuccessListener { url->
+                        //Got Image URL
+                        //Save to user profile
+
+                        FirebaseFirestore.getInstance()
+                            .collection(COLECTION_USERS)
+                            .document(userID)
+                            .update("Avatar url",url.toString())
+                            .addOnSuccessListener {
+                                //success
+                            }
+                            .addOnFailureListener {
+                                //error
+                            }
+
+                    }
+
+            }
+            .addOnFailureListener(){
+
+            }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode==1){
+            val imageBitmap = data?.extras?.get("data") as Bitmap  //bitmap=imatge a android
+            imageBitmap?.let{
+                //show in ImageView
+                avatar.setImageBitmap(it)
+                //upload
+                saveImageFileToCloud(it)
+            }
+        }
+    }
+
+    //endregion
 }
 
