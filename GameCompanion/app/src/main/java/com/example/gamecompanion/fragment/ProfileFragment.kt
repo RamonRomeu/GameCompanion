@@ -1,19 +1,15 @@
 package com.example.gamecompanion.fragment
 
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.gamecompanion.R
 import com.example.gamecompanion.activity.LoginActivity
 import com.example.gamecompanion.activity.RegisterActivity
 import com.example.gamecompanion.model.UserModel
@@ -24,7 +20,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.io.ByteArrayOutputStream
-import java.io.File
+import android.graphics.BitmapFactory
+import android.net.Uri
+import com.example.gamecompanion.R
+import java.io.ByteArrayInputStream
+import java.net.URI
+import java.net.URL
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -109,6 +110,7 @@ class ProfileFragment : Fragment() {
             ?.let {username->
                 //Si existe username fem Get
                 usernameTextView.text= "Hello ${username.capitalize()}"
+
             }?: run {
             //No username
 
@@ -122,8 +124,11 @@ class ProfileFragment : Fragment() {
                     //Got User Profile
                     val userProfile = documentSnapshot.toObject(UserModel::class.java)
                     usernameTextView.text = "Hello ${userProfile?.username?.capitalize()}"
+
+
                     //save locally
                     SharePreferencesManager().setUsername(requireContext(), userProfile?.username)
+
 
                 }
                 .addOnFailureListener {
@@ -131,6 +136,42 @@ class ProfileFragment : Fragment() {
                 }
 
         }
+
+
+       /* SharePreferencesManager().getProfilePictureUrl(requireContext())
+            ?.let {profilePicture->
+                //Si existe username fem Get
+                val myURL = Uri.parse(profilePicture)
+                avatar.setImageURI(myURL)
+
+            }?: run {
+            //No username
+
+            //Get User Profile (from FireStore)
+            val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+            FirebaseFirestore.getInstance()
+                .collection(COLECTION_USERS)
+                .document(userId)
+                .get()
+                .addOnSuccessListener { documentSnapshot ->
+                    //Got User Profile
+                    val userProfile = documentSnapshot.toObject(UserModel::class.java)
+                    usernameTextViewemail.text = "Hello ${userProfile?.profilePicture?.capitalize()}"
+                    val myURL = Uri.parse(userProfile?.profilePicture)
+                    avatar.setImageURI(myURL)
+
+                    //save locally
+                    SharePreferencesManager().setProfilePictureUrl(requireContext(), userProfile?.profilePicture)
+
+                }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_LONG).show()
+
+                }
+
+        }*/
+
+
     }
 
 
@@ -176,7 +217,7 @@ class ProfileFragment : Fragment() {
                         FirebaseFirestore.getInstance()
                             .collection(COLECTION_USERS)
                             .document(userID)
-                            .update("Avatar url",url.toString())
+                            .update("profilePicture",url.toString())
                             .addOnSuccessListener {
                                 //success
                             }

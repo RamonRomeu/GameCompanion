@@ -11,6 +11,7 @@ class SharePreferencesManager {
 
     val userPreferencesFileName = "userPreferences"
     val usernameKey="username"
+    val profilePictureKey="picture"
 
 
 
@@ -18,14 +19,23 @@ class SharePreferencesManager {
 
         val sharedPreferences= context.getSharedPreferences(userPreferencesFileName, Context.MODE_PRIVATE)
         return sharedPreferences.getString(usernameKey,null)
-
     }
-
 
     fun setUsername(context: Context, username: String?){
 
         val sharedPreferences= context.getSharedPreferences(userPreferencesFileName, Context.MODE_PRIVATE)
         sharedPreferences.edit().putString(usernameKey,username).apply()
+    }
+
+    fun getProfilePictureUrl(context: Context): String?{
+        val sharedPreferences= context.getSharedPreferences(userPreferencesFileName, Context.MODE_PRIVATE)
+        return sharedPreferences.getString(profilePictureKey,null)
+    }
+
+    fun setProfilePictureUrl(context: Context, profilePicture: String?){
+
+        val sharedPreferences= context.getSharedPreferences(userPreferencesFileName, Context.MODE_PRIVATE)
+        sharedPreferences.edit().putString(profilePictureKey,profilePicture).apply()
     }
 
 

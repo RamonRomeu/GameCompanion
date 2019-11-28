@@ -34,6 +34,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+    <TextView
+            android:id="@+id/usernameTextViewemail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     <ImageView
             android:id="@+id/avatar"
             android:layout_width="@dimen/item_medium_height" android:layout_height="@dimen/item_medium_height"
