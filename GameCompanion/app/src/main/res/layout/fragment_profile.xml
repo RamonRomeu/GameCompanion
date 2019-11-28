@@ -4,8 +4,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".fragment.ProfileFragment"
-            android:orientation="vertical"
->
+            android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -34,6 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+<<<<<<< HEAD
     <ImageView
             android:id="@+id/avatar"
             android:layout_width="@dimen/item_medium_height" android:layout_height="@dimen/item_medium_height"
@@ -45,4 +45,6 @@
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:text="Update Picture"
             android:layout_gravity="center" />
+=======
+>>>>>>> parent of 7325166... added camera
 </LinearLayout>
