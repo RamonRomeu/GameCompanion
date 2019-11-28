@@ -3,6 +3,8 @@ package com.example.gamecompanion.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.gamecompanion.R
+import com.example.gamecompanion.fragment.ChatFragment
+import com.example.gamecompanion.fragment.NewsFragment
 import com.example.gamecompanion.fragment.ProfileFragment
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.MobileAds
@@ -21,25 +23,38 @@ class MainActivity : AppCompatActivity() {
         val adRequest= AdRequest.Builder().build()
         bannerAdView.loadAd(adRequest)
 
+        //Create Fragment
+        val chatFragment = ChatFragment()
+        val profileFragment = ProfileFragment()
+        val newsFragment = NewsFragment();
+        //val FriendsFragment = FriendsFragment();
 
+        val fragmentManager = supportFragmentManager
+
+        val fragmentTransaction= fragmentManager.beginTransaction()
+        fragmentTransaction.replace(fragmentContainer.id, newsFragment)
+        fragmentTransaction.commit()
 
         bottomNavigationView.setOnNavigationItemSelectedListener{ menuItem ->
             //Switch menu item id
             when(menuItem.itemId){
                 R.id.chat ->{
+                    val fragmentTransaction= fragmentManager.beginTransaction()
+                    fragmentTransaction.replace(fragmentContainer.id, chatFragment)
+                    fragmentTransaction.commit()
 
                     FirebaseAnalytics.getInstance(this).logEvent("Chat_Tab_Click", null)
                 }
-                R.id.feed ->{
+                R.id.news ->{
+                    val fragmentTransaction= fragmentManager.beginTransaction()
+                    fragmentTransaction.replace(fragmentContainer.id, newsFragment)
+                    fragmentTransaction.commit()
+
                     FirebaseAnalytics.getInstance(this).logEvent("News_Tab_Click", null)
                 }
                 R.id.profile ->{
-                    //Create Fragment
-                    val profileFragment = ProfileFragment()
-                    //Add Fragment to Fragment Container
-                    val fragmentManager = supportFragmentManager
                     val fragmentTransaction= fragmentManager.beginTransaction()
-                    fragmentTransaction.add(fragmentContainer.id, profileFragment)
+                    fragmentTransaction.replace(fragmentContainer.id, profileFragment)
                     fragmentTransaction.commit()
 
                     FirebaseAnalytics.getInstance(this).logEvent("Profile_Tab_Click", null)
