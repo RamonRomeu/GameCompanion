@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         val fragmentManager = supportFragmentManager
 
+        //ARREGLAR ENTRADA
         val fragmentTransaction= fragmentManager.beginTransaction()
         fragmentTransaction.replace(fragmentContainer.id, newsFragment)
         fragmentTransaction.commit()

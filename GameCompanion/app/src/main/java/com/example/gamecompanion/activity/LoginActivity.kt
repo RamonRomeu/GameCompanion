@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.gamecompanion.R
+import com.example.gamecompanion.model.UserModel
+import com.example.gamecompanion.util.COLECTION_USERS
+import com.example.gamecompanion.util.SharePreferencesManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -15,20 +19,24 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        lateinit var auth: FirebaseAuth
+        auth = FirebaseAuth.getInstance()
+
+        val currentUser = auth.currentUser
 
         //1 Listener
         loginButton.setOnClickListener {
             //2 Read TextFields
-            val username = usernameEditText.text?.toString().orEmpty()
+            val email = emailEditText.text?.toString().orEmpty()
             val password = passwordEditText.text?.toString().orEmpty()
 
             //3 Validacio
             //3.1 Username validation
-            if(username.trim().isEmpty()){
+            if(email.trim().isEmpty()){
                 //Error
-                Toast.makeText(this, getString(R.string.tab_profile), Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Email error", Toast.LENGTH_LONG).show()
                 //or
-                usernameEditText.error = "Username required"
+                usernameEditText.error = "Email required"
                 return@setOnClickListener
 
             }
@@ -37,37 +45,54 @@ class LoginActivity : AppCompatActivity() {
 
             if(password.isBlank() || !isPasswordValid(password)){
                 //Error
-                Toast.makeText(this, getString(R.string.tab_profile), Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "password error", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Sign in success, update UI with the signed-in user's information
+
+                        val user = auth.currentUser
+
+                       //FirebaseAuth.getInstance().updateCurrentUser(user)
+                        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+                        FirebaseFirestore.getInstance()
+                            .collection(COLECTION_USERS)
+                            .document(userId)
+                            .get()
+                            .addOnSuccessListener { documentSnapshot ->
+                                //Got User Profile
+                                val userProfile = documentSnapshot.toObject(UserModel::class.java)
+
+
+                                Toast.makeText(baseContext,  "Hello there, ${userProfile?.username?.capitalize()}",
+                                    Toast.LENGTH_SHORT).show()
+
+
+
+                            }
+                        
+                        finish()
+
+                    } else {
+                        // If sign in fails, display a message to the user.
+
+                        Toast.makeText(baseContext, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show()
+
+                    }
+
+                    // ...
+                }
+
             //4 Create User
-            /*FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
-                .addOnSuccessListener { authResult ->
-
-                    //create user profile
-                    val userModel = UserModel(
-                        userId = authResult.user?.uid ?: "",
-                        username = username,
-                        email = email
-
-                    )
-                    //Add to Firebase
-                    FirebaseFirestore.getInstance()
-                        .collection(COLECTION_USERS)
-                        .document(authResult.user?.uid ?:"")
-                        .set(userModel)
-                        //succes creating user
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Success creating new user", Toast.LENGTH_LONG).show()
-                            finish()
-                        }
-                        .addOnFailureListener {
-                            //handle errors
-                            Toast.makeText(this, it.localizedMessage, Toast.LENGTH_LONG).show()
-                        }
-
-
+            /*FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
+                .addOnSuccessListener {authResult ->
+                    Toast.makeText(this, "Logged In", Toast.LENGTH_LONG).show()
+                    //FirebaseAuth.getInstance().updateCurrentUser()
+                    finish()
                 }
                 .addOnFailureListener {
                     //5 Handle Errors

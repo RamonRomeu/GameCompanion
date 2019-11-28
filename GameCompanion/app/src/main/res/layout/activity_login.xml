@@ -20,7 +20,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
 
-                android:id= "@+id/usernameEditText"
+                android:id= "@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="16dp"

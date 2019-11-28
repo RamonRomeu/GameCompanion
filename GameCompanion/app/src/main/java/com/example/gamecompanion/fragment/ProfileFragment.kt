@@ -123,7 +123,7 @@ class ProfileFragment : Fragment() {
                 .addOnSuccessListener { documentSnapshot ->
                     //Got User Profile
                     val userProfile = documentSnapshot.toObject(UserModel::class.java)
-                    usernameTextView.text = "Hello ${userProfile?.username?.capitalize()}"
+                    usernameTextView.text = "${userProfile?.username?.capitalize()}"
 
 
                     //save locally
