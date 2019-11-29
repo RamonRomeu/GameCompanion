@@ -62,25 +62,6 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
-            //CREACIÓ DE LA LLISTA I LA RECYCLER VIEW
-
-            // Create Json Utility
-            val gson = Gson()
-            // Parse json file to String
-            val jsonString = application.assets.open("badjokes.json").bufferedReader() //LECTURA DE FIREBASE
-                .use {
-                    it.readText()
-                }
-            // Parse String to `JokeList` Model
-            val newsListModel: NewsList = gson.fromJson(jsonString, NewsList::class.java) //CONVERSIÓ A NEWS LIST DES DE STRINGS
-//        // Get List of jokes
-            val news: ArrayList<NewsModel>? = newsListModel.news
-
-
-            // Configure Recyclerview
-            recyclerView.adapter = NewsAdapter(ArrayList(news.orEmpty()))
-            recyclerView.layoutManager = LinearLayoutManager(this) //ERROR RARO
-
         }
 
     override fun onResume() {
