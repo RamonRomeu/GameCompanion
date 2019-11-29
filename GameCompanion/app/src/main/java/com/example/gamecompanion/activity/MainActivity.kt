@@ -31,11 +31,6 @@ class MainActivity : AppCompatActivity() {
 
         val fragmentManager = supportFragmentManager
 
-        //ARREGLAR ENTRADA
-        val fragmentTransaction= fragmentManager.beginTransaction()
-        fragmentTransaction.replace(fragmentContainer.id, newsFragment)
-        fragmentTransaction.commit()
-
         bottomNavigationView.setOnNavigationItemSelectedListener{ menuItem ->
             //Switch menu item id
             when(menuItem.itemId){
@@ -68,5 +63,6 @@ class MainActivity : AppCompatActivity() {
             }
            true
         }
+        bottomNavigationView.selectedItemId = R.id.profile
     }
 }

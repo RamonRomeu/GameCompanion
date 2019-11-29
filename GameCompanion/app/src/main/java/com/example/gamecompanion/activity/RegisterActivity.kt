@@ -3,6 +3,8 @@ package com.example.gamecompanion.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.gamecompanion.R
 import com.example.gamecompanion.model.UserModel
@@ -10,7 +12,7 @@ import com.example.gamecompanion.util.COLECTION_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.fragment_profile.*
+
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -19,6 +21,8 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
+
+        indeterminateBar.visibility= View.GONE
 
         //1 Listener
         RegisterButton.setOnClickListener {
@@ -54,7 +58,7 @@ class RegisterActivity : AppCompatActivity() {
             //4 Create User
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
                 .addOnSuccessListener { authResult ->
-
+                    indeterminateBar.visibility= View.VISIBLE
                     //create user profile
                     val userModel = UserModel(
                         userId = authResult.user?.uid ?: "",
@@ -81,6 +85,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
                 .addOnFailureListener {
                     //5 Handle Errors
+                    indeterminateBar.visibility= View.GONE
                     Toast.makeText(this,it.localizedMessage,Toast.LENGTH_LONG).show()
                 }
         }

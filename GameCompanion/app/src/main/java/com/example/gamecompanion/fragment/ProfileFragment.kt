@@ -2,6 +2,7 @@ package com.example.gamecompanion.fragment
 
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
@@ -22,7 +23,10 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 import java.io.ByteArrayOutputStream
 import android.graphics.BitmapFactory
 import android.net.Uri
+import androidx.core.net.toFile
+import com.squareup.picasso.Picasso
 import com.example.gamecompanion.R
+import android.widget.ProgressBar
 import java.io.ByteArrayInputStream
 import java.net.URI
 import java.net.URL
@@ -59,10 +63,12 @@ class ProfileFragment : Fragment() {
     }
 
         private fun initUI() {
+
             //TODO: if user == null
             if (FirebaseAuth.getInstance().currentUser == null) {
                 //1-No user
                 //show register buttom
+                indeterminateBar.visibility=View.GONE
                 loginButton.visibility = View.VISIBLE
                 logoutButton.visibility= View.GONE
                 registerButton.visibility = View.VISIBLE
@@ -79,6 +85,7 @@ class ProfileFragment : Fragment() {
             } else {
                 //2-User Available
                 //hide register button
+                indeterminateBar.visibility=View.GONE
                 registerButton.visibility = View.GONE
                 //else: Show Profile
                 loginButton.visibility = View.GONE
@@ -138,11 +145,11 @@ class ProfileFragment : Fragment() {
         }
 
 
-       /* SharePreferencesManager().getProfilePictureUrl(requireContext())
+        SharePreferencesManager().getProfilePictureUrl(requireContext())
             ?.let {profilePicture->
                 //Si existe username fem Get
-                val myURL = Uri.parse(profilePicture)
-                avatar.setImageURI(myURL)
+
+                Picasso.get().load(profilePicture).placeholder(R.drawable.ic_profile).into(avatar);
 
             }?: run {
             //No username
@@ -156,9 +163,11 @@ class ProfileFragment : Fragment() {
                 .addOnSuccessListener { documentSnapshot ->
                     //Got User Profile
                     val userProfile = documentSnapshot.toObject(UserModel::class.java)
-                    usernameTextViewemail.text = "Hello ${userProfile?.profilePicture?.capitalize()}"
-                    val myURL = Uri.parse(userProfile?.profilePicture)
-                    avatar.setImageURI(myURL)
+
+
+                    Picasso.get().load(userProfile?.profilePicture).placeholder(R.drawable.ic_profile).into(avatar);
+
+
 
                     //save locally
                     SharePreferencesManager().setProfilePictureUrl(requireContext(), userProfile?.profilePicture)
@@ -167,9 +176,10 @@ class ProfileFragment : Fragment() {
                 .addOnFailureListener {
                     Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_LONG).show()
 
+
                 }
 
-        }*/
+        }
 
 
     }
@@ -220,6 +230,9 @@ class ProfileFragment : Fragment() {
                             .update("profilePicture",url.toString())
                             .addOnSuccessListener {
                                 //success
+                                indeterminateBar.visibility=View.GONE
+                                Picasso.get().load(url).placeholder(R.drawable.ic_profile).into(avatar);
+                                SharePreferencesManager().setProfilePictureUrl(requireContext(), url.toString())
                             }
                             .addOnFailureListener {
                                 //error
@@ -239,6 +252,7 @@ class ProfileFragment : Fragment() {
             val imageBitmap = data?.extras?.get("data") as Bitmap  //bitmap=imatge a android
             imageBitmap?.let{
                 //show in ImageView
+                indeterminateBar.visibility=View.VISIBLE
                 avatar.setImageBitmap(it)
                 //upload
                 saveImageFileToCloud(it)

@@ -2,6 +2,7 @@ package com.example.gamecompanion.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import com.example.gamecompanion.R
 import com.example.gamecompanion.model.UserModel
@@ -10,12 +11,19 @@ import com.example.gamecompanion.util.SharePreferencesManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.fragment_profile.*
+import android.widget.ProgressBar
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.emailEditText
+import kotlinx.android.synthetic.main.activity_login.indeterminateBar
+import kotlinx.android.synthetic.main.activity_login.passwordEditText
+
 
 class LoginActivity : AppCompatActivity() {
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
@@ -24,8 +32,13 @@ class LoginActivity : AppCompatActivity() {
 
         val currentUser = auth.currentUser
 
+
+        indeterminateBar.visibility= View.GONE
+
         //1 Listener
         loginButton.setOnClickListener {
+
+
             //2 Read TextFields
             val email = emailEditText.text?.toString().orEmpty()
             val password = passwordEditText.text?.toString().orEmpty()
@@ -36,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
                 //Error
                 Toast.makeText(this, "Email error", Toast.LENGTH_LONG).show()
                 //or
-                usernameEditText.error = "Email required"
+                emailEditText.error = "Email required"
                 return@setOnClickListener
 
             }
@@ -47,10 +60,12 @@ class LoginActivity : AppCompatActivity() {
                 //Error
                 Toast.makeText(this, "password error", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
+
             }
 
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
+                    indeterminateBar.visibility= View.VISIBLE
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
 
@@ -78,7 +93,7 @@ class LoginActivity : AppCompatActivity() {
 
                     } else {
                         // If sign in fails, display a message to the user.
-
+                        indeterminateBar.visibility= View.GONE
                         Toast.makeText(baseContext, "Authentication failed.",
                             Toast.LENGTH_SHORT).show()
 
@@ -87,17 +102,7 @@ class LoginActivity : AppCompatActivity() {
                     // ...
                 }
 
-            //4 Create User
-            /*FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
-                .addOnSuccessListener {authResult ->
-                    Toast.makeText(this, "Logged In", Toast.LENGTH_LONG).show()
-                    //FirebaseAuth.getInstance().updateCurrentUser()
-                    finish()
-                }
-                .addOnFailureListener {
-                    //5 Handle Errors
-                    Toast.makeText(this,it.localizedMessage, Toast.LENGTH_LONG).show()
-                }*/
+
         }
     }
 
