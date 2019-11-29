@@ -29,7 +29,7 @@ import com.example.gamecompanion.R
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gamecompanion.activity.NewsAdapter
-import com.example.gamecompanion.model.NewsList
+
 import com.example.gamecompanion.model.NewsModel
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_news.*

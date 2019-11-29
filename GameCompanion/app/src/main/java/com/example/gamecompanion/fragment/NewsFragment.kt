@@ -18,9 +18,9 @@ import com.example.gamecompanion.R
 import com.example.gamecompanion.activity.LoginActivity
 import com.example.gamecompanion.activity.NewsAdapter
 import com.example.gamecompanion.activity.RegisterActivity
-import com.example.gamecompanion.model.NewsList
 import com.example.gamecompanion.model.NewsModel
 import com.example.gamecompanion.model.UserModel
+import com.example.gamecompanion.util.COLECTION_NEWS
 import com.example.gamecompanion.util.COLECTION_USERS
 import com.example.gamecompanion.util.SharePreferencesManager
 import com.google.firebase.auth.FirebaseAuth
@@ -56,28 +56,22 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set Layout Type
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-/*
-        //CREACIÓ DE LA LLISTA I LA RECYCLER VIEW
+        // Create Adapter
+        val newsAdapter = NewsAdapter()
 
-        // Create Json Utility
-        val gson = Gson()
-        // Parse json file to String
-        val jsonString = application.assets.open("badjokes.json").bufferedReader() //LECTURA DE FIREBASE
-            .use {
-                it.readText()
+        FirebaseFirestore.getInstance()
+            .collection(COLECTION_NEWS)
+            .get()
+            .addOnSuccessListener { document ->
+
+                val newsList = document.toObjects(NewsModel::class.java)
+                newsAdapter.list = ArrayList(newsList.toList())
+                // RecyclerView <> Adapter
+                recyclerView.adapter = newsAdapter
             }
-        // Parse String to `JokeList` Model
-        val newsListModel: NewsList = gson.fromJson(jsonString, NewsList::class.java) //CONVERSIÓ A NEWS LIST DES DE STRINGS
-//        // Get List of jokes
-        val news: ArrayList<NewsModel>? = newsListModel.news
-
-
-        // Configure Recyclerview
-        recyclerView.adapter = NewsAdapter(ArrayList(news.orEmpty()))
-        recyclerView.layoutManager = LinearLayoutManager(this) //ERROR RARO
-*/
-
 
 
     }

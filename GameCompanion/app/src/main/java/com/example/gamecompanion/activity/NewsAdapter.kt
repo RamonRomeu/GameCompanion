@@ -15,30 +15,30 @@ import kotlinx.android.synthetic.main.item_news.view.*
  * Created by alex on 2019-10-11.
  */
 
-class NewsAdapter(
-    var list: ArrayList<NewsModel>
-): RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+
+    var list = ArrayList<NewsModel>()
+
+
+    // Create item_news View
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val item: View = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
+        return ViewHolder(item)
+    }
 
     override fun getItemCount(): Int {
         return list.count()
     }
 
-    // Create item_news View
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsAdapter.ViewHolder {
-        val item: View = LayoutInflater.from(parent.context).inflate(R.layout.item_news, parent, false)
-        return ViewHolder(item)
-    }
 
     // Update Items
-    override fun onBindViewHolder(holder: NewsAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val new = list[position]
 
-        holder.title.text = new.newsTitle
-        holder.description.text = new.newsDescription
-        // 1 - Download image from URL
-        // 2 - Cache Image
-        // 3 - Load image into ImageView
-        Glide.with(holder.imageView.context).load(list[position].newsUrl).into(holder.imageView)
+        holder.title.text = new.Title
+        holder.description.text = new.Description
+
+        Glide.with(holder.imageView.context).load(list[position].imageUrl).into(holder.imageView)
     }
 
     class ViewHolder(item: View): RecyclerView.ViewHolder(item) {
