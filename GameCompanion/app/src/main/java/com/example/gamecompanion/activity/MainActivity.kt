@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.gamecompanion.R
 import com.example.gamecompanion.fragment.ChatFragment
+import com.example.gamecompanion.fragment.FriendsFragment
 import com.example.gamecompanion.fragment.NewsFragment
 import com.example.gamecompanion.fragment.ProfileFragment
 import com.google.android.gms.ads.AdRequest
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val chatFragment = ChatFragment()
         val profileFragment = ProfileFragment()
         val newsFragment = NewsFragment();
-        //val FriendsFragment = FriendsFragment();
+        val friendsFragment = FriendsFragment();
 
         val fragmentManager = supportFragmentManager
 
@@ -56,6 +57,10 @@ class MainActivity : AppCompatActivity() {
                     FirebaseAnalytics.getInstance(this).logEvent("Profile_Tab_Click", null)
                 }
                 R.id.friends ->{
+                    val fragmentTransaction= fragmentManager.beginTransaction()
+                    fragmentTransaction.replace(fragmentContainer.id, friendsFragment)
+                    fragmentTransaction.commit()
+
                     FirebaseAnalytics.getInstance(this).logEvent("Friends_Tab_Click", null)
                 }
 

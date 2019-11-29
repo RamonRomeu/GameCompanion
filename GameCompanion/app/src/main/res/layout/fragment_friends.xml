@@ -17,6 +17,6 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:height="@dimen/item_medium_height"
-            android:text="Chat Tab Coming Soon"/>
+            android:text="Friends Tab Coming Soon"/>
 
 </LinearLayout>
