@@ -18,11 +18,23 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/item_layout_margin"
             android:text="NEWS"
+            android:fontFamily="@font/myriadbold"
             android:textColor="@color/colorWhite" />
+    <ProgressBar
+            android:id="@+id/indeterminateBar"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:indeterminateTint="@color/colorStroke"
+            android:layout_gravity="center"
+            android:visibility="gone"
+
+
+            />
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
 
 </LinearLayout>

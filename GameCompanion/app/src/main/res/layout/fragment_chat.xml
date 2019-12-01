@@ -19,6 +19,7 @@
             android:gravity="center"
             android:height="@dimen/item_medium_height"
             android:text="Chat Tab Coming Soon"
+            android:fontFamily="@font/myriadbold"
             android:textColor="@color/colorWhite"/>
 
 </LinearLayout>

@@ -33,7 +33,6 @@ import com.example.gamecompanion.activity.NewsAdapter
 import com.example.gamecompanion.model.NewsModel
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.fragment_profile.usernameTextView
 import java.io.ByteArrayInputStream
 import java.net.URI
@@ -266,6 +265,9 @@ class ProfileFragment : Fragment() {
                 //upload
                 saveImageFileToCloud(it)
             }
+        }
+        else{
+            Toast.makeText(requireContext(), getString(R.string.camera_error), Toast.LENGTH_LONG).show()
         }
     }
 

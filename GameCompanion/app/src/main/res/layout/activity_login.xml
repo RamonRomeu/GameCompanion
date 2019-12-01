@@ -33,13 +33,14 @@
         <com.google.android.material.textfield.TextInputEditText
 
                 android:textSize="14dp"
-                android:hint="Username"
+                android:hint="Email"
                 android:textColorHint="@color/colorWhite"
                 android:textColor="@color/colorWhite"
                 android:id= "@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_medium_height"
                 android:layout_marginBottom="@dimen/item_layout_margin"
+                android:fontFamily="@font/myriadregular"
                 android:gravity="center"/>
 
 
@@ -72,6 +73,7 @@
                 android:layout_width="match_parent" android:layout_height="@dimen/item_medium_height"
                 android:gravity="center"
                 android:layout_marginBottom="@dimen/item_layout_margin"
+                android:fontFamily="@font/myriadregular"
                 android:inputType="textPassword"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -85,6 +87,7 @@
             android:textColor="@color/colorWhite"
             android:layout_marginStart="@dimen/item_layout_margin"
             android:layout_marginEnd="@dimen/item_layout_margin"
+            android:fontFamily="@font/myriadbold"
             android:textSize="16dp"
 
             />

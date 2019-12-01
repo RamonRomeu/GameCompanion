@@ -12,8 +12,11 @@ import com.example.gamecompanion.util.COLECTION_USERS
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
-
+import kotlinx.android.synthetic.main.activity_register.emailEditText
+import kotlinx.android.synthetic.main.activity_register.indeterminateBar
+import kotlinx.android.synthetic.main.activity_register.passwordEditText
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -36,23 +39,25 @@ class RegisterActivity : AppCompatActivity() {
             //3.1 Username validation
             if(username.trim().isEmpty()){
                 //Error
-                Toast.makeText(this, getString(R.string.tab_profile),Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.username_error),Toast.LENGTH_LONG).show()
                 //or
-                usernameEditText.error = "Username required"
+                usernameEditText.error = "Username Required"
                 return@setOnClickListener
 
             }
             //3.2 Email Validation
             if(email.isBlank() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
                 //Error
-                Toast.makeText(this, getString(R.string.tab_profile),Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.email_error),Toast.LENGTH_LONG).show()
+                emailEditText.error = "Email Required"
                 return@setOnClickListener
             }
             //3.3 Password Validation
 
             if(password.isBlank() || !isPasswordValid(password)){
                 //Error
-                Toast.makeText(this, getString(R.string.tab_profile),Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.password_error),Toast.LENGTH_LONG).show()
+                passwordEditText.error = "Password Required"
                 return@setOnClickListener
             }
 

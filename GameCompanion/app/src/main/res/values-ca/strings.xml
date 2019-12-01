@@ -8,5 +8,10 @@
     <string name="profile_register_button">Registrat aquí</string>
     <string name="profile_logout_button">Surt</string>
     <string name="profile_login_button">Entra</string>
+    <string name="email_error">Error de email</string>
+    <string name="username_error">Error de usuari</string>
+    <string name="password_error">Error de contrasenya</string>
+    <string name="authentication_failed">Autenticació Fallida</string>
+    <string name="camera_error">La camera no esta disponible</string>
 
 </resources>

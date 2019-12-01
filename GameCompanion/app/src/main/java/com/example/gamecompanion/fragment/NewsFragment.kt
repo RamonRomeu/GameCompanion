@@ -28,7 +28,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_news.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 
@@ -55,7 +54,7 @@ class NewsFragment : Fragment() {
     //Init /Main
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        indeterminateBar.visibility= View.VISIBLE
         // Set Layout Type
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -71,6 +70,7 @@ class NewsFragment : Fragment() {
                 newsAdapter.list = ArrayList(newsList.toList())
                 // RecyclerView <> Adapter
                 recyclerView.adapter = newsAdapter
+                indeterminateBar.visibility= View.GONE
             }
 
 

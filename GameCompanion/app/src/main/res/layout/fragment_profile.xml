@@ -21,6 +21,7 @@
             android:layout_marginEnd="@dimen/item_layout_margin"
             android:background="@drawable/button_border"
             android:text="@string/profile_register_button"
+            android:fontFamily="@font/myriadbold"
             android:textColor="@color/colorWhite" />
 
     <Button
@@ -32,7 +33,8 @@
             android:id="@+id/logoutButton"
             android:layout_width="match_parent"
             android:layout_height="@dimen/item_medium_height"
-            android:text="@string/profile_logout_button"/>
+            android:text="@string/profile_logout_button"
+            android:fontFamily="@font/myriadbold"/>
 
 
     <!--DO DIMENS-->
@@ -46,6 +48,7 @@
             android:layout_marginEnd="@dimen/item_layout_margin"
             android:background="@drawable/button_border"
             android:text="@string/profile_login_button"
+            android:fontFamily="@font/myriadbold"
             android:textColor="@color/colorWhite" />
 
     <ImageView
@@ -63,6 +66,7 @@
             android:gravity="center"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:fontFamily="@font/myriadregular"
             android:text="Hisadasdsa" />
 
     <Button
@@ -72,6 +76,7 @@
             android:layout_gravity="center"
             android:background="@drawable/button_border"
             android:text="Update Picture"
+            android:fontFamily="@font/myriadbold"
             android:textColor="@color/colorWhite" />
 
     <ProgressBar

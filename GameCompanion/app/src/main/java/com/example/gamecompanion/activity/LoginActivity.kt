@@ -48,9 +48,9 @@ class LoginActivity : AppCompatActivity() {
             //3.1 Username validation
             if(email.trim().isEmpty()){
                 //Error
-                Toast.makeText(this, "Email error", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.email_error), Toast.LENGTH_LONG).show()
                 //or
-                emailEditText.error = "Email required"
+                emailEditText.error = "Email Required"
                 return@setOnClickListener
 
             }
@@ -59,7 +59,8 @@ class LoginActivity : AppCompatActivity() {
 
             if(password.isBlank() || !isPasswordValid(password)){
                 //Error
-                Toast.makeText(this, "password error", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.password_error), Toast.LENGTH_LONG).show()
+                passwordEditText.error = "Password Required"
                 return@setOnClickListener
 
             }
@@ -95,7 +96,7 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         // If sign in fails, display a message to the user.
                         indeterminateBar.visibility= View.GONE
-                        Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.makeText(baseContext, getString(R.string.authentication_failed),
                             Toast.LENGTH_SHORT).show()
 
                     }

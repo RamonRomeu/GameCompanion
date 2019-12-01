@@ -35,8 +35,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="16dp"
-
+                android:textColor="@color/colorWhite"
                 android:textSize="14dp"
+                android:fontFamily="@font/myriadregular"
                 android:gravity="center"/>
 
 
@@ -65,6 +66,8 @@
             android:textColorHint="@color/colorWhite"
             android:layout_marginBottom="@dimen/item_layout_margin"
             android:textSize="14dp"
+            android:fontFamily="@font/myriadregular"
+            android:textColor="@color/colorWhite"
             android:gravity="center"/>
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -91,6 +94,8 @@
               android:layout_width="match_parent" android:layout_height="@dimen/item_medium_height"
               android:gravity="center"
             android:textSize="14dp"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/myriadregular"
               android:layout_marginBottom="@dimen/item_layout_margin"
               android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -98,6 +103,7 @@
     <Button android:layout_width="match_parent" android:layout_height="@dimen/item_medium_height"
             android:id="@+id/RegisterButton"
             android:text="Register"
+            android:fontFamily="@font/myriadbold"
             android:textSize="16dp"
             android:textColor="@color/colorWhite"
             android:background="@drawable/button_border"
