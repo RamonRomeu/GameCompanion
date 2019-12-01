@@ -11,9 +11,6 @@ import com.example.gamecompanion.R
 import com.example.gamecompanion.model.NewsModel
 import kotlinx.android.synthetic.main.item_news.view.*
 
-/**
- * Created by alex on 2019-10-11.
- */
 
 class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
@@ -42,8 +39,8 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
     }
 
     class ViewHolder(item: View): RecyclerView.ViewHolder(item) {
-        val title: TextView = item.title // item_joke.xml > @id
-        val description: TextView = item.description // item_joke.xml > @id
-        val imageView: ImageView = item.imageView // item_joke.xml > @id
+        val title: TextView = item.title
+        val description: TextView = item.description
+        val imageView: ImageView = item.imageView
     }
 }

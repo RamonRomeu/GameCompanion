@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gamecompanion.activity.NewsAdapter
 
 import com.example.gamecompanion.model.NewsModel
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_news.*
 import kotlinx.android.synthetic.main.fragment_profile.usernameTextView
@@ -259,6 +260,7 @@ class ProfileFragment : Fragment() {
             val imageBitmap = data?.extras?.get("data") as Bitmap  //bitmap=imatge a android
             imageBitmap?.let{
                 //show in ImageView
+                FirebaseAnalytics.getInstance(requireContext()).logEvent("Profile_Pic", null)
                 indeterminateBar.visibility=View.VISIBLE
                 avatar.setImageBitmap(it)
                 //upload

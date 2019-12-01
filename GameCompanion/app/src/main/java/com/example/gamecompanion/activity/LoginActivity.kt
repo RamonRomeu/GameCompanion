@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import android.widget.ProgressBar
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.emailEditText
 import kotlinx.android.synthetic.main.activity_login.indeterminateBar
@@ -68,7 +69,7 @@ class LoginActivity : AppCompatActivity() {
                     indeterminateBar.visibility= View.VISIBLE
                     if (task.isSuccessful) {
                         // Sign in success, update UI with the signed-in user's information
-
+                        FirebaseAnalytics.getInstance(this).logEvent("Log_In_Success", null)
                         val user = auth.currentUser
 
                        //FirebaseAuth.getInstance().updateCurrentUser(user)

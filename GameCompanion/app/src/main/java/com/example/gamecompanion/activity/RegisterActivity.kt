@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.example.gamecompanion.R
 import com.example.gamecompanion.model.UserModel
 import com.example.gamecompanion.util.COLECTION_USERS
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
@@ -73,6 +74,7 @@ class RegisterActivity : AppCompatActivity() {
                         .set(userModel)
                             //succes creating user
                         .addOnSuccessListener {
+                            FirebaseAnalytics.getInstance(this).logEvent("Register_Success", null)
                             Toast.makeText(this, "Success creating new user",Toast.LENGTH_LONG).show()
                             finish()
                         }
