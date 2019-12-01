@@ -2,15 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/item_layout_margin"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorBlue">
 
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/item_layout_margin"
+            android:layout_marginEnd="@dimen/item_layout_margin"
             android:orientation="vertical">
 
         <TextView
@@ -19,13 +20,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:text="Title"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"/>
 
         <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Description" />
+                android:text="Description"
+                android:textColor="@color/colorStroke"
+                />
 
         <ImageView
                 android:id="@+id/imageView"

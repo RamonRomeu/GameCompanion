@@ -6,59 +6,97 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:background="@color/colorBackground"
         android:orientation="vertical"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+
+
         tools:context=".activity.LoginActivity">
 
 
     <com.google.android.material.textfield.TextInputLayout
+            style="@style/LoginTextInputLayoutStyle"
+            android:layout_marginStart="@dimen/item_layout_margin"
+            android:layout_marginEnd="@dimen/item_layout_margin"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxStrokeColor="@color/colorStroke"
+            app:boxBackgroundColor="@color/colorBlue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Username"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+            android:textColorHint="@color/colorWhite"
+            app:hintEnabled="false"
+
+           >
 
         <com.google.android.material.textfield.TextInputEditText
 
+                android:textSize="14dp"
+                android:hint="Username"
+                android:textColorHint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
                 android:id= "@+id/emailEditText"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="16dp"
+                android:layout_height="@dimen/item_medium_height"
+                android:layout_marginBottom="@dimen/item_layout_margin"
                 android:gravity="center"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-
-
+            android:layout_marginStart="@dimen/item_layout_margin"
+            android:layout_marginEnd="@dimen/item_layout_margin"
+            style="@style/LoginTextInputLayoutStyle"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxStrokeColor="@color/colorStroke"
+            app:boxBackgroundColor="@color/colorBlue"
+            android:textColorHint="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+            app:hintEnabled="false"
+
+            >
 
         <com.google.android.material.textfield.TextInputEditText
 
+                android:textSize="14dp"
+                android:hint="Password"
+                android:textColorHint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
                 android:id= "@+id/passwordEditText"
-                android:layout_width="match_parent" android:layout_height="48dp"
+                android:layout_width="match_parent" android:layout_height="@dimen/item_medium_height"
                 android:gravity="center"
-
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="@dimen/item_layout_margin"
                 android:inputType="textPassword"/>
+
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button android:layout_width="match_parent" android:layout_height="48dp"
+
+    <Button android:layout_width="match_parent" android:layout_height="@dimen/item_medium_height"
+            android:background="@drawable/button_border"
             android:id="@+id/loginButton"
             android:text="Login"
-            android:backgroundTint="@color/colorPrimary"
-            android:textColor="#FFFFFF"
+
+            android:textColor="@color/colorWhite"
+            android:layout_marginStart="@dimen/item_layout_margin"
+            android:layout_marginEnd="@dimen/item_layout_margin"
+            android:textSize="16dp"
+
             />
 
     <ProgressBar
             android:id="@+id/indeterminateBar"
-            android:layout_width="wrap_content"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:indeterminateTint="@color/colorStroke"
             android:visibility="gone"
-            android:layout_height="wrap_content"
+
+
             />
 
 

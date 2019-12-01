@@ -7,27 +7,36 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+
+        android:background="@color/colorBackground"
         tools:context=".activity.RegisterActivity">
 
 
     <com.google.android.material.textfield.TextInputLayout
-
-
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:hintEnabled="false"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxStrokeColor="@color/colorStroke"
+            app:boxBackgroundColor="@color/colorBlue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
+
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
         <com.google.android.material.textfield.TextInputEditText
 
+                android:hint="Username"
+                android:textColorHint="@color/colorWhite"
                 android:id= "@+id/usernameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="16dp"
 
-
+                android:textSize="14dp"
                 android:gravity="center"/>
 
 
@@ -35,53 +44,73 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-
-
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:hintEnabled="false"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxStrokeColor="@color/colorStroke"
+            app:boxBackgroundColor="@color/colorBlue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
     <com.google.android.material.textfield.TextInputEditText
-
+            android:hint="Email"
             android:id= "@+id/emailEditText"
-            android:layout_width="match_parent" android:layout_height="48dp"
-
-            android:layout_marginBottom="16dp"
-
+            android:layout_width="match_parent" android:layout_height="@dimen/item_medium_height"
+            android:textColorHint="@color/colorWhite"
+            android:layout_marginBottom="@dimen/item_layout_margin"
+            android:textSize="14dp"
             android:gravity="center"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-
-
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:hintEnabled="false"
+            app:boxCornerRadiusBottomEnd="0dp"
+            app:boxCornerRadiusBottomStart="0dp"
+            app:boxCornerRadiusTopEnd="0dp"
+            app:boxCornerRadiusTopStart="0dp"
+            app:boxStrokeColor="@color/colorStroke"
+            app:boxBackgroundColor="@color/colorBlue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
     <com.google.android.material.textfield.TextInputEditText
-
+            android:hint="Password"
+            android:textColorHint="@color/colorWhite"
             android:id= "@+id/passwordEditText"
-              android:layout_width="match_parent" android:layout_height="48dp"
+              android:layout_width="match_parent" android:layout_height="@dimen/item_medium_height"
               android:gravity="center"
-
-              android:layout_marginBottom="16dp"
+            android:textSize="14dp"
+              android:layout_marginBottom="@dimen/item_layout_margin"
               android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button android:layout_width="match_parent" android:layout_height="48dp"
+    <Button android:layout_width="match_parent" android:layout_height="@dimen/item_medium_height"
             android:id="@+id/RegisterButton"
             android:text="Register"
-            android:backgroundTint="@color/colorPrimary"
-            android:textColor="#FFFFFF"
+            android:textSize="16dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/button_border"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
     />
 
     <ProgressBar
             android:id="@+id/indeterminateBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:indeterminateTint="@color/colorStroke"
+            android:visibility="gone"
             />
 
 </LinearLayout>
