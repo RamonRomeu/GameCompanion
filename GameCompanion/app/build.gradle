@@ -53,9 +53,15 @@ dependencies {
     //imatges carregar
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    //news
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation "androidx.recyclerview:recyclerview:1.0.0"
     implementation 'com.github.bumptech.glide:glide:4.10.0'
+
+    //llibreria retrofit per lo de twitch
+    implementation 'com.squareup.retrofit2:retrofit:2.6.1'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
