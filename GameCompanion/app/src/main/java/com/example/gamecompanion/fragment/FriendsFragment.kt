@@ -15,10 +15,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.gamecompanion.Network.RickAndMortyAPIService
 import com.example.gamecompanion.Network.TwitchApiService
 import com.example.gamecompanion.R
 import com.example.gamecompanion.activity.LoginActivity
 import com.example.gamecompanion.activity.RegisterActivity
+import com.example.gamecompanion.model.CharactersResponse
 import com.example.gamecompanion.model.StreamsResponse
 import com.example.gamecompanion.model.UserModel
 import com.example.gamecompanion.util.COLECTION_USERS
@@ -60,6 +62,25 @@ class FriendsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+//        RickAndMortyAPIService.endpoints.getCharacters().enqueue(object: retrofit2.Callback<CharactersResponse>{
+//            override fun onFailure(call: retrofit2.Call<CharactersResponse>, t: Throwable) {
+//                //No internet
+//                Log.w("FriendsFragment",t)
+//            }
+//
+//            override fun onResponse(
+//                call: retrofit2.Call<CharactersResponse>,
+//                response: retrofit2.Response<CharactersResponse>
+//            ) {
+//                if(response.isSuccessful){ //response.code()==200
+//                   val characters= response.body()?.results
+//                    Log.i("FriendsFragment",characters?.toString() ?: "Null body")
+//                }
+//            }
+//
+//        })
+
+        //TWITCH
         TwitchApiService.endpoints.getStreams().enqueue(object : retrofit2.Callback<StreamsResponse>{
 
             override fun onFailure(call: retrofit2.Call<StreamsResponse>, t: Throwable) {
@@ -73,6 +94,46 @@ class FriendsFragment : Fragment() {
                 if(response.isSuccessful){ //code ==200
                     //All good
                     Log.i("StreamsFragment",response.body()?.toString() ?: "Null body")
+                    val streams = response.body()?.data
+                    //iterate streams
+                    streams?.forEach {
+                        //Get Games
+                        it.gameId?.let { gameId->
+                            TwitchApiService.endpoints.getGames(gameId).enqueue(object : retrofit2.Callback<GameResponse>{
+                                override fun onFailure(
+                                    call: retrofit2.Call<GameResponse>,
+                                    t: Throwable
+                                ) {
+                                    Log.w("StreamsFragment",t)
+                                }
+
+                                override fun onResponse(
+                                    call: retrofit2.Call<GameResponse>,
+                                    response: retrofit2.Response<GameResponse>
+                                ) {
+                                    if(response.isSuccessful){
+                                        val games=response.body()?.data
+                                        //Replace gameId -> game
+                                        streams?.forEach{stream->  //PER CADA STREAM DONEM EL JOC PER EL SEU GAMEid
+                                            games?.forEach {game->
+                                                if (stream.gameId == game.id) {
+                                                    stream.game = game
+                                                }
+                                            }
+                                        }
+                                        Log.i("StreamsFragment","Got games $games")
+
+                                    }else{
+                                        Log.w("StreamsFragment","Error getting games")
+                                    }
+                                }
+
+                            })
+                        }
+
+                    }
+
+                   // response.body()?.data?.first()?.getThumbnailImageUrl()
                 } else{
 
                     //Not OK
