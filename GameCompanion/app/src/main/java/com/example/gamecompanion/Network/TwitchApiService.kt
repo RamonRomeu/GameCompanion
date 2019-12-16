@@ -18,13 +18,13 @@ interface TwitchApiService {
     //Endpoint /streams
     @Headers("Client-ID: $clientId")
     @GET("streams")
-    fun getStreams(): retrofit2.Call<StreamsResponse>
+    suspend fun getStreams(): StreamsResponse
 
 
     //Endpoint /games
     @Headers("Client-ID: $clientId")
     @GET("games")
-    fun getGames(@Query("id") gameId: String): retrofit2.Call<GameResponse>
+    suspend fun getGames(@Query("id") gameId: String): GameResponse
 
 
 

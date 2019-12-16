@@ -1,25 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragment.ChatFragment"
         android:orientation="vertical"
-        android:gravity="center"
-        android:background="@color/colorBackground"
-        >
+        android:background="@color/colorBackground">
 
     <!-- TODO: Update blank fragment layout -->
-
-
-    <TextView
-            android:id="@+id/usernameTextView"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:height="@dimen/item_medium_height"
-            android:text="Chat Tab Coming Soon"
-            android:fontFamily="@font/myriadbold"
-            android:textColor="@color/colorWhite"/>
+            android:layout_above="@+id/bottomContent"
+            android:layout_height="match_parent"/>
 
-</LinearLayout>
+
+    <RelativeLayout
+            android:id="@+id/bottomContent"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_medium_height"
+             android:layout_alignParentBottom="true"
+             android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/messageEditText"
+                android:layout_width="match_parent"
+                android:layout_toStartOf="@+id/sendButton"
+                android:layout_height="match_parent"
+
+                />
+
+
+        <Button
+                 android:id="@+id/sendButton"
+                android:layout_width="100dp"
+                android:text="Send"
+                android:layout_alignParentBottom="true"
+                android:layout_height="match_parent" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +17,15 @@ import android.widget.Toast
 import com.example.gamecompanion.R
 import com.example.gamecompanion.activity.LoginActivity
 import com.example.gamecompanion.activity.RegisterActivity
+import com.example.gamecompanion.model.ChatMessage
 import com.example.gamecompanion.model.UserModel
+import com.example.gamecompanion.util.COLECTION_CHAT
 import com.example.gamecompanion.util.COLECTION_USERS
 import com.example.gamecompanion.util.SharePreferencesManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -49,6 +53,17 @@ class ChatFragment : Fragment() {
     //Init /Main
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //Init UI
+
+
+        //Send Message
+        sendButton.setOnClickListener{
+            val text= messageEditText.text.toString()
+            if(text.isNotBlank()){
+                sendMessage(text)
+            }
+        }
+
 
     }
 
@@ -57,5 +72,19 @@ class ChatFragment : Fragment() {
         //initUI()
     }
 
+    private fun sendMessage(text: String){
+        //Prepare Model
+        val chatMessage = ChatMessage(text = text, timestamp = System.currentTimeMillis(), userId = FirebaseAuth.getInstance().currentUser?.uid)
+        //Send Message
+        FirebaseFirestore.getInstance()
+            .collection(COLECTION_CHAT)
+            .add(chatMessage)
+            .addOnSuccessListener {
+                Log.i("ChatFragment", "MessageAdded")
+            }
+            .addOnFailureListener{
+                it.printStackTrace()
+            }
+    }
 
 }
