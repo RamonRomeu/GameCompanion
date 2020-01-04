@@ -26,16 +26,14 @@
             android:id="@+id/messageEditText"
                 android:layout_width="match_parent"
                 android:layout_toStartOf="@+id/sendButton"
-                android:layout_height="match_parent"
-
-                />
+                android:layout_height="match_parent" />
 
 
         <Button
                  android:id="@+id/sendButton"
                 android:layout_width="100dp"
                 android:text="Send"
-                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
                 android:layout_height="match_parent" />
 
 
