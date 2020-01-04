@@ -1,35 +1,18 @@
 package com.example.gamecompanion.fragment
 
 
-import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gamecompanion.R
-import com.example.gamecompanion.activity.LoginActivity
-import com.example.gamecompanion.activity.NewsAdapter
-import com.example.gamecompanion.activity.RegisterActivity
+import com.example.gamecompanion.adapter.NewsAdapter
 import com.example.gamecompanion.model.NewsModel
-import com.example.gamecompanion.model.UserModel
 import com.example.gamecompanion.util.COLECTION_NEWS
-import com.example.gamecompanion.util.COLECTION_USERS
-import com.example.gamecompanion.util.SharePreferencesManager
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_news.*
-import java.io.ByteArrayOutputStream
-import java.io.File
 
 
 // TODO: Rename parameter arguments, choose names that match

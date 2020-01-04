@@ -16,7 +16,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".model.NewsModel"></activity>
-        <activity android:name=".activity.NewsAdapter" />
+        <activity android:name=".adapter.NewsAdapter" />
         <activity
                 android:name=".activity.RegisterActivity"
                 android:configChanges="orientation|keyboardHidden"

@@ -1,4 +1,4 @@
-package com.example.gamecompanion.activity
+package com.example.gamecompanion.adapter
 
 import android.view.LayoutInflater
 import android.view.View

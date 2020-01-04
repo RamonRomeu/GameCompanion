@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gamecompanion.R
 import com.example.gamecompanion.activity.LoginActivity
 import com.example.gamecompanion.activity.RegisterActivity
+import com.example.gamecompanion.adapter.ChatAdapter
 import com.example.gamecompanion.model.ChatMessage
 import com.example.gamecompanion.model.UserModel
 import com.example.gamecompanion.util.COLECTION_CHAT
@@ -61,6 +62,7 @@ class ChatFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         //Get Chats
+        subscribeToMessages()
 
         //Send Message
         sendButton.setOnClickListener{
@@ -78,43 +80,27 @@ class ChatFragment : Fragment() {
         //initUI()
     }
 
-
-//    private fun subscribeToMessages() {
-//        FirebaseFirestore.getInstance()
-//            .collection(COLECTION_CHAT)
-//            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-//                //Check fragment exists
-//                if(!isAdded) return@addSnapshotListener
-//
-//                //Get messages from collection
-//                val messages = querySnapshot?.documents
-//                    ?.map { it.toObject(ChatMessage::class.java) ?: ChatMessage() }
-//                    ?: emptyList()
-//
-//                //Update List
-//                adapter.list = messages
-//                adapter.notifyDataSetChanged()
-//            }
-//
-//
-//    }
-
-
-    private fun getMessages(){
+    private fun subscribeToMessages() {
         FirebaseFirestore.getInstance()
             .collection(COLECTION_CHAT)
-            .get()
-            .addOnSuccessListener {
-                //Get Messages
-                val messages = it.documents.map { it.toObject(ChatMessage::class.java) ?: ChatMessage() }
-                //Update to Adapter
-                adapter.list=messages
-                adapter.notifyDataSetChanged()
+            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+                //Check fragment exists
+                if(!isAdded) return@addSnapshotListener
 
+                //Get messages from collection
+                val messages = querySnapshot?.documents
+                    ?.map { it.toObject(ChatMessage::class.java) ?: ChatMessage() }
+                    ?: emptyList()
+
+                var messagesOrdered : List<ChatMessage> = messages.sortedWith(compareBy({it.timestamp}))
+
+                //Update List
+                adapter.list = messagesOrdered
+                adapter.notifyDataSetChanged()
             }
 
-
     }
+
 
 
     private fun sendMessage(text: String){

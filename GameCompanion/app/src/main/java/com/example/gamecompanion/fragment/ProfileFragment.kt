@@ -2,7 +2,6 @@ package com.example.gamecompanion.fragment
 
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
@@ -21,22 +20,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_profile.*
 import java.io.ByteArrayOutputStream
-import android.graphics.BitmapFactory
-import android.net.Uri
-import androidx.core.net.toFile
 import com.squareup.picasso.Picasso
 import com.example.gamecompanion.R
-import android.widget.ProgressBar
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.gamecompanion.activity.NewsAdapter
 
-import com.example.gamecompanion.model.NewsModel
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_profile.usernameTextView
-import java.io.ByteArrayInputStream
-import java.net.URI
-import java.net.URL
 
 
 // TODO: Rename parameter arguments, choose names that match

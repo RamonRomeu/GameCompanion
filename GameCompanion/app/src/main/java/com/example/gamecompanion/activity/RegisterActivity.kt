@@ -37,6 +37,10 @@ class RegisterActivity : AppCompatActivity() {
                 //Close Activity
                 finish()
             }
+            /*else{
+                Toast.makeText(this, "Error creating new user", Toast.LENGTH_LONG)
+                    .show()
+            }*/
         })
 
         registerViewModel.isLoading.observe(this, Observer{ isLoading ->
