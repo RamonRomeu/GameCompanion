@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.gamecompanion.R
 import com.example.gamecompanion.fragment.ChatFragment
-import com.example.gamecompanion.fragment.FriendsFragment
+import com.example.gamecompanion.fragment.StreamsFragment
 import com.example.gamecompanion.fragment.NewsFragment
 import com.example.gamecompanion.fragment.ProfileFragment
 import com.google.android.gms.ads.AdRequest
@@ -27,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         //Create Fragment
         val chatFragment = ChatFragment()
         val profileFragment = ProfileFragment()
-        val newsFragment = NewsFragment();
-        val friendsFragment = FriendsFragment();
+        val newsFragment = NewsFragment()
+        val friendsFragment = StreamsFragment()
 
         val fragmentManager = supportFragmentManager
 

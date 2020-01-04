@@ -13,14 +13,14 @@ interface TwitchApiService {
 
     //Endpoint /streams
     @Headers("Client-ID: $clientId")
-    @GET("streams")
+    @GET("streams?game_id=491115")
     suspend fun getStreams(): StreamsResponse
 
 
     //Endpoint /games
     @Headers("Client-ID: $clientId")
     @GET("games")
-    suspend fun getGames(@Query("id") gameId: String): GameResponse
+    suspend fun getGames(@Query("id") gameId: List<String>): GameResponse
 
 
 
