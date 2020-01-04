@@ -72,6 +72,26 @@ class ChatFragment : Fragment() {
         //initUI()
     }
 
+//    private fun subscribeToMessages() {
+//        FirebaseFirestore.getInstance()
+//            .collection(COLECTION_CHAT)
+//            .addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+//                //Check fragment exists
+//                if(!isAdded) return@addSnapshotListener
+//
+//                //Get messages from collection
+//                val messages = querySnapshot?.documents
+//                    ?.map { it.toObject(ChatMessage::class.java) ?: ChatMessage() }
+//                    ?: emptyList()
+//
+//                //Update List
+//                adapter.list = messages
+//                adapter.notifyDataSetChanged()
+//            }
+//
+//
+//    }
+
     private fun sendMessage(text: String){
         //Prepare Model
         val chatMessage = ChatMessage(text = text, timestamp = System.currentTimeMillis(), userId = FirebaseAuth.getInstance().currentUser?.uid)
@@ -81,6 +101,7 @@ class ChatFragment : Fragment() {
             .add(chatMessage)
             .addOnSuccessListener {
                 Log.i("ChatFragment", "MessageAdded")
+                //subscribeToMessages()
             }
             .addOnFailureListener{
                 it.printStackTrace()

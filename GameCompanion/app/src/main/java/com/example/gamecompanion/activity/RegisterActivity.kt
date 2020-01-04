@@ -6,9 +6,11 @@ import android.util.Patterns
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.example.gamecompanion.R
 import com.example.gamecompanion.model.UserModel
 import com.example.gamecompanion.util.COLECTION_USERS
+import com.example.gamecompanion.viewmodels.RegisterViewModel
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,9 +23,25 @@ import kotlinx.android.synthetic.main.activity_register.passwordEditText
 
 class RegisterActivity : AppCompatActivity() {
 
+    var registerViewModel: RegisterViewModel = RegisterViewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
+        registerViewModel.isRegisterSuccess.observe(this, Observer { isUserCreated ->
+            if(isUserCreated) {
+                //Success Creating User Profile!
+                Toast.makeText(this, "Success creating new user", Toast.LENGTH_LONG)
+                    .show()
+                //Close Activity
+                finish()
+            }
+        })
+
+        registerViewModel.isLoading.observe(this, Observer{ isLoading ->
+            indeterminateBar.visibility = if(isLoading) View.VISIBLE else View.GONE
+        })
 
 
         indeterminateBar.visibility= View.GONE
@@ -37,7 +55,7 @@ class RegisterActivity : AppCompatActivity() {
 
             //3 Validacio
             //3.1 Username validation
-            if(username.trim().isEmpty()){
+            if(!registerViewModel.isUsernameValid(username)){
                 //Error
                 Toast.makeText(this, getString(R.string.username_error),Toast.LENGTH_LONG).show()
                 //or
@@ -46,7 +64,7 @@ class RegisterActivity : AppCompatActivity() {
 
             }
             //3.2 Email Validation
-            if(email.isBlank() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            if(!registerViewModel.isEmailValid(email)){
                 //Error
                 Toast.makeText(this, getString(R.string.email_error),Toast.LENGTH_LONG).show()
                 emailEditText.error = "Email Required"
@@ -54,7 +72,7 @@ class RegisterActivity : AppCompatActivity() {
             }
             //3.3 Password Validation
 
-            if(password.isBlank() || !isPasswordValid(password)){
+            if(!registerViewModel.isPasswordValid(password)){
                 //Error
                 Toast.makeText(this, getString(R.string.password_error),Toast.LENGTH_LONG).show()
                 passwordEditText.error = "Password Required"
@@ -62,69 +80,10 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             //4 Create User
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
-                .addOnSuccessListener { authResult ->
-                    indeterminateBar.visibility= View.VISIBLE
-                    //create user profile
-                    val userModel = UserModel(
-                        userId = authResult.user?.uid ?: "",
-                        username = username,
-                        email = email
-
-                    )
-                    //Add to Firebase
-                    FirebaseFirestore.getInstance()
-                        .collection(COLECTION_USERS)
-                        .document(authResult.user?.uid ?:"")
-                        .set(userModel)
-                            //succes creating user
-                        .addOnSuccessListener {
-                            FirebaseAnalytics.getInstance(this).logEvent("Register_Success", null)
-                            Toast.makeText(this, "Success creating new user",Toast.LENGTH_LONG).show()
-                            finish()
-                        }
-                        .addOnFailureListener {
-                            //handle errors
-                            Toast.makeText(this, it.localizedMessage,Toast.LENGTH_LONG).show()
-                        }
-
-
-                }
-                .addOnFailureListener {
-                    //5 Handle Errors
-                    indeterminateBar.visibility= View.GONE
-                    Toast.makeText(this,it.localizedMessage,Toast.LENGTH_LONG).show()
-                }
+            registerViewModel.createUser(username, email, password)
         }
     }
 
 
-    private fun isPasswordValid(password: String): Boolean{
 
-        //password >= 4 characters
-
-        if(password.length < 4 )
-            return false
-
-        var digit =0
-        var let =0
-
-        //Contain letter and number
-
-         for(letter in password){
-             if(letter.isDigit())
-                 digit++
-             else if(letter.isLetter())
-                 let++
-         }
-
-        if(digit== password.length)
-            return false
-
-        if(let==password.length)
-            return false
-
-
-        return true
-    }
 }
