@@ -1,4 +1,4 @@
-package com.example.gamecompanion.fragment
+package com.example.gamecompanion.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,6 +1,5 @@
 package com.example.gamecompanion.model
 
-import com.example.gamecompanion.fragment.GameModel
 import com.google.gson.annotations.SerializedName
 
 data class StreamModel(

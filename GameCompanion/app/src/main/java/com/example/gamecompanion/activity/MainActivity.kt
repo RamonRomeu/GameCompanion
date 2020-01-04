@@ -20,9 +20,9 @@ class MainActivity : AppCompatActivity() {
 
 
         //Load Ad
-        MobileAds.initialize(this){}
-        val adRequest= AdRequest.Builder().build()
-        bannerAdView.loadAd(adRequest)
+     //   MobileAds.initialize(this){}
+       // val adRequest= AdRequest.Builder().build()
+     //   bannerAdView.loadAd(adRequest)
 
         //Create Fragment
         val chatFragment = ChatFragment()

@@ -1,12 +1,8 @@
 package com.example.gamecompanion.Network
 
-import com.example.gamecompanion.fragment.GameModel
-import com.example.gamecompanion.fragment.GameResponse
+import com.example.gamecompanion.model.GameResponse
 import com.example.gamecompanion.model.StreamsResponse
-import com.google.android.gms.common.internal.ClientIdentity
-import io.opencensus.common.ServerStatsFieldEnums
 
-import okhttp3.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gamecompanion.R
 import com.example.gamecompanion.activity.LoginActivity
 import com.example.gamecompanion.activity.RegisterActivity
@@ -50,11 +51,16 @@ class ChatFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_chat, container, false)
     }
 
+
+    private val adapter= ChatAdapter(emptyList())
     //Init /Main
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //Init UI
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        //Get Chats
 
         //Send Message
         sendButton.setOnClickListener{
@@ -71,6 +77,7 @@ class ChatFragment : Fragment() {
         super.onResume()
         //initUI()
     }
+
 
 //    private fun subscribeToMessages() {
 //        FirebaseFirestore.getInstance()
@@ -91,6 +98,24 @@ class ChatFragment : Fragment() {
 //
 //
 //    }
+
+
+    private fun getMessages(){
+        FirebaseFirestore.getInstance()
+            .collection(COLECTION_CHAT)
+            .get()
+            .addOnSuccessListener {
+                //Get Messages
+                val messages = it.documents.map { it.toObject(ChatMessage::class.java) ?: ChatMessage() }
+                //Update to Adapter
+                adapter.list=messages
+                adapter.notifyDataSetChanged()
+
+            }
+
+
+    }
+
 
     private fun sendMessage(text: String){
         //Prepare Model
