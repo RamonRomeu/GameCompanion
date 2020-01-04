@@ -30,6 +30,12 @@
                 android:parentActivityName=".activity.MainActivity"
                 android:screenOrientation="portrait" />
         <activity
+                android:name=".activity.NewsDetailsActivity"
+                android:configChanges="orientation|keyboardHidden"
+                android:label="Details"
+                android:parentActivityName=".activity.MainActivity"
+                android:screenOrientation="portrait" />
+        <activity
                 android:name=".activity.MainActivity"
                 android:configChanges="orientation|keyboardHidden"
                 android:screenOrientation="portrait">

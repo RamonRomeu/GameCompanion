@@ -1,6 +1,7 @@
 package com.example.gamecompanion.fragment
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,11 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gamecompanion.R
+import com.example.gamecompanion.activity.NewsDetailsActivity
+import com.example.gamecompanion.activity.RegisterActivity
 import com.example.gamecompanion.adapter.NewsAdapter
 import com.example.gamecompanion.model.NewsModel
 import com.example.gamecompanion.util.COLECTION_NEWS
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_news.*
+import kotlinx.android.synthetic.main.fragment_news.indeterminateBar
+import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.item_news.*
+import kotlinx.android.synthetic.main.item_news.view.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -55,8 +62,6 @@ class NewsFragment : Fragment() {
                 recyclerView.adapter = newsAdapter
                 indeterminateBar.visibility= View.GONE
             }
-
-
     }
 
     override fun onResume() {
