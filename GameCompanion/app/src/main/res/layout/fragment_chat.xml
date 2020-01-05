@@ -31,7 +31,10 @@
 
 
         <Button
-                 android:id="@+id/sendButton"
+                android:id="@+id/sendButton"
+                android:fontFamily="@font/myriadbold"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/button_border"
                 android:layout_width="100dp"
                 android:text="Send"
                 android:layout_alignParentEnd="true"

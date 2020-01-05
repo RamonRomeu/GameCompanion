@@ -29,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_profile.*
+import kotlinx.android.synthetic.main.item_chat.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 
@@ -69,6 +70,7 @@ class ChatFragment : Fragment() {
             val text= messageEditText.text.toString()
             if(text.isNotBlank()){
                 sendMessage(text)
+                messageEditText.text.clear()
             }
         }
 
@@ -92,6 +94,8 @@ class ChatFragment : Fragment() {
                     ?.map { it.toObject(ChatMessage::class.java) ?: ChatMessage() }
                     ?: emptyList()
 
+                var i = querySnapshot?.documents
+
                 var messagesOrdered : List<ChatMessage> = messages.sortedWith(compareBy({it.timestamp}))
 
                 //Update List
@@ -105,12 +109,18 @@ class ChatFragment : Fragment() {
 
     private fun sendMessage(text: String){
         //Prepare Model
-        val chatMessage = ChatMessage(text = text, timestamp = System.currentTimeMillis(), userId = FirebaseAuth.getInstance().currentUser?.uid)
+        val chatMessage = ChatMessage(text = text, timestamp = System.currentTimeMillis(), userId = FirebaseAuth.getInstance().currentUser?.uid, document = "")
         //Send Message
         FirebaseFirestore.getInstance()
             .collection(COLECTION_CHAT)
             .add(chatMessage)
             .addOnSuccessListener {
+
+                FirebaseFirestore.getInstance()
+                    .collection(COLECTION_CHAT)
+                    .document(it.id)
+                    .update("document", it.id.toString())
+
                 Log.i("ChatFragment", "MessageAdded")
                 //subscribeToMessages()
             }
