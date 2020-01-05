@@ -1,5 +1,6 @@
 package com.example.gamecompanion.adapter
 
+import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,12 +33,28 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
         holder.textview.text = list[position].text
 
         holder.cross.setOnClickListener{
-            val id:String = list[position].document.toString()
 
-            FirebaseFirestore.getInstance()
-                .collection(COLECTION_CHAT)
-                .document(id)
-                .delete()
+            AlertDialog.Builder(holder.cross.context)
+                .setTitle("Hey, listen!!!")
+                .setMessage("Are you sure you want to delete the message?")
+                .setPositiveButton("*Snaps her/his fingers*") { dialog, buttonId->
+                    val id:String = list[position].document.toString()
+
+                    FirebaseFirestore.getInstance()
+                        .collection(COLECTION_CHAT)
+                        .document(id)
+                        .delete()
+                }
+                .setNegativeButton("Nope") { dialog, buttonId->
+                    dialog.dismiss()
+                }
+                .show()
+
+
+
+
+
+
 
         }
     }
