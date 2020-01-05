@@ -109,17 +109,30 @@ class ChatFragment : Fragment() {
 
     private fun sendMessage(text: String){
         //Prepare Model
-        val chatMessage = ChatMessage(text = text, timestamp = System.currentTimeMillis(), userId = FirebaseAuth.getInstance().currentUser?.uid, document = "")
+
+        var userIdVar = FirebaseAuth.getInstance().currentUser?.uid
+        val chatMessage = ChatMessage(text = text, timestamp = System.currentTimeMillis(), userId = userIdVar, document = "")
         //Send Message
         FirebaseFirestore.getInstance()
             .collection(COLECTION_CHAT)
             .add(chatMessage)
             .addOnSuccessListener {
 
+                //Update Document online
                 FirebaseFirestore.getInstance()
                     .collection(COLECTION_CHAT)
                     .document(it.id)
-                    .update("document", it.id.toString())
+                    .update("document", it.id)
+
+                //Get username from userID
+
+
+                //Update userName online
+                FirebaseFirestore.getInstance()
+                    .collection(COLECTION_CHAT)
+                    .document(it.id)
+                    .update("userId", it.id)
+
 
                 Log.i("ChatFragment", "MessageAdded")
                 //subscribeToMessages()
