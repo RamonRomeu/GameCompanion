@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.gamecompanion.R
 import com.example.gamecompanion.model.ChatMessage
 import com.example.gamecompanion.util.COLECTION_CHAT
@@ -19,6 +20,7 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
         val textview = itemView.textview
         val cross = itemView.cross
         val userName = itemView.userName
+        val urlPic = itemView.profilePic
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,6 +35,8 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.textview.text = list[position].text
         holder.userName.text = list[position].userId
+
+        Glide.with(holder.urlPic.context).load(list[position].pictureUrl).into(holder.urlPic)
 
         holder.cross.setOnClickListener{
 

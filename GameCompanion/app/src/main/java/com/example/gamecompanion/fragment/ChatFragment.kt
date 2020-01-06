@@ -27,6 +27,7 @@ import com.example.gamecompanion.util.SharePreferencesManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.item_chat.*
@@ -124,15 +125,30 @@ class ChatFragment : Fragment() {
                     .document(it.id)
                     .update("document", it.id)
 
-                //Get username from userID
-
-
                 //Update userName online
                 FirebaseFirestore.getInstance()
                     .collection(COLECTION_CHAT)
                     .document(it.id)
-                    .update("userId", it.id)
+                    .update("userId", SharePreferencesManager().getUsername(requireContext()))
 
+
+                //Get userPic
+
+                var s = ""
+
+                FirebaseFirestore.getInstance()
+                    .collection(COLECTION_USERS)
+                    .document(it.id)
+                    .get()
+                    .addOnSuccessListener { documentSnapshot ->
+                        s = documentSnapshot.get("profilePicture").toString()
+                    }
+
+                //Update UserPic online
+                FirebaseFirestore.getInstance()
+                    .collection(COLECTION_CHAT)
+                    .document(it.id)
+                    .update("pictureUrl", s)
 
                 Log.i("ChatFragment", "MessageAdded")
                 //subscribeToMessages()
