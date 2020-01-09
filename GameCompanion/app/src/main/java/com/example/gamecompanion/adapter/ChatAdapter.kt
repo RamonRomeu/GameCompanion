@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.gamecompanion.R
 import com.example.gamecompanion.model.ChatMessage
+import com.example.gamecompanion.model.UserModel
 import com.example.gamecompanion.util.COLECTION_CHAT
 import com.example.gamecompanion.util.COLECTION_USERS
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.item_chat.view.*
 
 class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
@@ -36,7 +38,21 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
         holder.textview.text = list[position].text
         holder.userName.text = list[position].userId
 
-        Glide.with(holder.urlPic.context).load(list[position].pictureUrl).into(holder.urlPic)
+
+
+        //Get User Profile (from FireStore)
+        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        FirebaseFirestore.getInstance()
+            .collection(COLECTION_USERS)
+            .document(userId)
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                //Got User Profile
+                val userProfile = documentSnapshot.toObject(UserModel::class.java)
+                val aux = "${userProfile?.profilePicture}"
+
+
+        Glide.with(holder.urlPic.context).load(aux).into(holder.urlPic)
 
         holder.cross.setOnClickListener{
 
@@ -57,11 +73,6 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
                 .show()
 
 
-
-
-
-
-
         }
     }
-}
+}}
