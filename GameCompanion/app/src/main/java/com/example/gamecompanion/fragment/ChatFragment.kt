@@ -125,30 +125,7 @@ class ChatFragment : Fragment() {
                     .document(it.id)
                     .update("document", it.id)
 
-                //Update userName online
-                FirebaseFirestore.getInstance()
-                    .collection(COLECTION_CHAT)
-                    .document(it.id)
-                    .update("userId", SharePreferencesManager().getUsername(requireContext()))
 
-
-                //Get userPic
-
-                var s = ""
-
-                FirebaseFirestore.getInstance()
-                    .collection(COLECTION_USERS)
-                    .document(it.id)
-                    .get()
-                    .addOnSuccessListener { documentSnapshot ->
-                        s = documentSnapshot.get("profilePicture").toString()
-                    }
-
-                //Update UserPic online
-                FirebaseFirestore.getInstance()
-                    .collection(COLECTION_CHAT)
-                    .document(it.id)
-                    .update("pictureUrl", s)
 
                 Log.i("ChatFragment", "MessageAdded")
                 //subscribeToMessages()

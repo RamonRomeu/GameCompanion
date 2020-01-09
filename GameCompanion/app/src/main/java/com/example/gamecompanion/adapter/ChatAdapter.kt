@@ -36,7 +36,7 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.textview.text = list[position].text
-        holder.userName.text = list[position].userId
+
 
 
 
@@ -50,6 +50,7 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
                 //Got User Profile
                 val userProfile = documentSnapshot.toObject(UserModel::class.java)
                 val aux = "${userProfile?.profilePicture}"
+                holder.userName.text = "${userProfile?.username}"
 
 
         Glide.with(holder.urlPic.context).load(aux).into(holder.urlPic)
