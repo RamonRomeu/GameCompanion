@@ -35,25 +35,6 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textview.text = list[position].text
-
-
-            if(list[position].userId != ""){
-
-        //Get User Profile (from FireStore)
-        //val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
-        FirebaseFirestore.getInstance()
-            .collection(COLECTION_USERS)
-            .document(list[position].userId ?: "")
-            .get()
-            .addOnSuccessListener { documentSnapshot ->
-                //Got User Profile
-                val userProfile = documentSnapshot.toObject(UserModel::class.java)
-                val aux = "${userProfile?.profilePicture}"
-                holder.userName.text = "${userProfile?.username}"
-
-
-        Glide.with(holder.urlPic.context).load(aux).into(holder.urlPic)
 
         holder.cross.setOnClickListener{
 
@@ -75,6 +56,27 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
 
 
         }
+
+
+        holder.textview.text = list[position].text
+
+
+            if(list[position].userId != ""){
+
+        FirebaseFirestore.getInstance()
+            .collection(COLECTION_USERS)
+            .document(list[position].userId ?: "")
+            .get()
+            .addOnSuccessListener { documentSnapshot ->
+                //Got User Profile
+                val userProfile = documentSnapshot.toObject(UserModel::class.java)
+                val aux = "${userProfile?.profilePicture}"
+                holder.userName.text = "${userProfile?.username}"
+
+
+        Glide.with(holder.urlPic.context).load(aux).into(holder.urlPic)
+
+
     }}else{
                 holder.userName.text = "random_guest"
 
