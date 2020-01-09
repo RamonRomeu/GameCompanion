@@ -41,10 +41,10 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
 
 
         //Get User Profile (from FireStore)
-        val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+        //val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
         FirebaseFirestore.getInstance()
             .collection(COLECTION_USERS)
-            .document(userId)
+            .document(list[position].userId ?: "")
             .get()
             .addOnSuccessListener { documentSnapshot ->
                 //Got User Profile
