@@ -38,7 +38,7 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
         holder.textview.text = list[position].text
 
 
-
+            if(list[position].userId != ""){
 
         //Get User Profile (from FireStore)
         //val userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
@@ -75,5 +75,9 @@ class ChatAdapter(var list: List<ChatMessage>): RecyclerView.Adapter<ChatAdapter
 
 
         }
-    }
+    }}else{
+                holder.userName.text = "random_guest"
+
+
+            }
 }}

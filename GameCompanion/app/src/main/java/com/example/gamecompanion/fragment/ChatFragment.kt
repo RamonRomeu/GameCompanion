@@ -111,8 +111,8 @@ class ChatFragment : Fragment() {
     private fun sendMessage(text: String){
         //Prepare Model
 
-        var userIdVar = FirebaseAuth.getInstance().currentUser?.uid
-        val chatMessage = ChatMessage(text = text, timestamp = System.currentTimeMillis(), userId = userIdVar, document = "")
+
+        val chatMessage = ChatMessage(text = text, timestamp = System.currentTimeMillis(), userId = FirebaseAuth.getInstance().currentUser?.uid ?: "", document = "")
         //Send Message
         FirebaseFirestore.getInstance()
             .collection(COLECTION_CHAT)
